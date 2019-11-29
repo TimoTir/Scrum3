@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="2d820c247ee548a6b73a4cfb8eeddbf9" Name="Diagram1">
+        <EntityTypeShape EntityType="ScrumModel.Kurssit" Width="1.5" PointX="3" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ScrumModel.KurssiToteutukset" Width="1.5" PointX="5.25" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ScrumModel.Logins" Width="1.5" PointX="0.75" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ScrumModel.Luokkatilat" Width="1.5" PointX="3" PointY="14.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ScrumModel.Opettajat" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ScrumModel.Opiskelijat" Width="1.5" PointX="3" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ScrumModel.Osallistumiset" Width="1.5" PointX="5.25" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ScrumModel.PaaKayttajat" Width="1.5" PointX="3" PointY="7.625" IsExpanded="true" />
+        <AssociationConnector Association="ScrumModel.FK__KurssiTot__Kurss__440B1D61" ManuallyRouted="false" />
+        <AssociationConnector Association="ScrumModel.FK_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="ScrumModel.FK__KurssiTot__Luokk__4222D4EF" ManuallyRouted="false" />
+        <AssociationConnector Association="ScrumModel.FK__Opettajat__Login__619B8048" ManuallyRouted="false" />
+        <AssociationConnector Association="ScrumModel.FK__Opiskelij__Login__3D5E1FD2" ManuallyRouted="false" />
+        <AssociationConnector Association="ScrumModel.FK__PaaKaytta__Login__628FA481" ManuallyRouted="false" />
+        <AssociationConnector Association="ScrumModel.FK__Osallistu__Oppil__4316F928" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
