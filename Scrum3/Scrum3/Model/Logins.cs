@@ -33,5 +33,6 @@ namespace Scrum3.Model
         public virtual ICollection<Opiskelijat> Opiskelijat { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PaaKayttajat> PaaKayttajat { get; set; }
+        public string LoginIdErrorMessage { get; internal set; }
     }
 }
