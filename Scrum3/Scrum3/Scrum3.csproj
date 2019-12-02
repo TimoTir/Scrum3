@@ -130,6 +130,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginsController.cs" />
+    <Compile Include="Controllers\OpiskelijatController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -229,6 +230,11 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Hae.cshtml" />
     <Content Include="Views\Logins\Index.cshtml" />
+    <Content Include="Views\Opiskelijat\Create.cshtml" />
+    <Content Include="Views\Opiskelijat\Delete.cshtml" />
+    <Content Include="Views\Opiskelijat\Details.cshtml" />
+    <Content Include="Views\Opiskelijat\Edit.cshtml" />
+    <Content Include="Views\Opiskelijat\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
