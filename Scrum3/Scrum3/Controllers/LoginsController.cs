@@ -10,7 +10,7 @@ namespace Scrum3.Controllers
     public class LoginsController : Controller
     {
 
-        public ActionResult Login()
+        public ActionResult Index()
         {
             return View();
         }
@@ -25,7 +25,7 @@ namespace Scrum3.Controllers
                 ViewBag.LoginMessage = "Successfull login";
                 ViewBag.LoggedStatus = "In";
                 Session["UserName"] = LoggedUser.UserName;
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Logins");
             }
             else
             {
@@ -35,6 +35,12 @@ namespace Scrum3.Controllers
                 return View("Login", LoginsModel);
             }
 
+        }
+        public ActionResult LogOut()
+        {
+            Session.Abandon();
+            ViewBag.LoggedStatus = "Out";
+            return RedirectToAction("Index", "Logins"); //Uloskirjautumisen jälkeen pääsivulle
         }
     }
 }
