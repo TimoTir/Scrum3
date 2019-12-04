@@ -17,8 +17,20 @@ namespace Scrum3.Controllers
         // GET: Opiskelijat
         public ActionResult Index()
         {
-            var opiskelijat = db.Opiskelijat.Include(o => o.Logins);
-            return View(opiskelijat.ToList());
+            if (Session["UserName"] == null)
+            {
+                return RedirectToAction("Index", "Logins");
+            }
+            else
+            {
+                ScrumEntities db = new ScrumEntities();
+                List<Opiskelijat> model = db.Opiskelijat.ToList();
+                db.Dispose();
+                return View(model);
+            }
+
+            //var opiskelijat = db.Opiskelijat.Include(o => o.Logins);
+            //return View(opiskelijat.ToList());
         }
 
         // GET: Opiskelijat/Details/5
@@ -127,6 +139,35 @@ namespace Scrum3.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        [HttpPost]
+        public ActionResult Authorize(Logins LoginsModel)
+        {
+            ScrumEntities db = new ScrumEntities();
+
+            var LoggedUser = db.Logins.SingleOrDefault(x => x.UserName == LoginsModel.UserName && x.PassWord == LoginsModel.PassWord);
+            if (LoggedUser != null)
+            {
+                ViewBag.LoginMessage = "Successfull login";
+                ViewBag.LoggedStatus = "In";
+                Session["UserName"] = LoggedUser.UserName;
+                return RedirectToAction("Index", "Opiskelijat");
+            }
+            else
+            {
+                ViewBag.LoginMessage = "Login unsuccessfull";
+                ViewBag.LoggedStatus = "Out";
+                LoginsModel.LoginIdErrorMessage = "Tuntematon käyttäjätunnus tai salasana.";
+                return View("Login", LoginsModel);
+            }
+
+        }
+        public ActionResult LogOut()
+        {
+            Session.Abandon();
+            ViewBag.LoggedStatus = "Out";
+            return RedirectToAction("Index", "Logins"); //Uloskirjautumisen jälkeen pääsivulle
         }
     }
 }

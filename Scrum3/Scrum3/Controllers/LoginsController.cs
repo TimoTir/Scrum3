@@ -25,7 +25,7 @@ namespace Scrum3.Controllers
                 ViewBag.LoginMessage = "Successfull login";
                 ViewBag.LoggedStatus = "In";
                 Session["UserName"] = LoggedUser.UserName;
-                return RedirectToAction("Index", "Logins");
+                return RedirectToAction("Index", "Home");
             }
             else
             {
