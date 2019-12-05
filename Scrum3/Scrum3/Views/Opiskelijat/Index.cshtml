@@ -4,10 +4,10 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Opiskelijatiedot</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Lisää uusi opiskelija", "Create")
 </p>
 <table class="table table-hover">
     <tr>
@@ -47,9 +47,9 @@
             @*@Html.DisplayFor(modelItem => item.Logins.UserName)*@
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Opiskelijanumero }) |
+            @Html.ActionLink("Muokkaa", "Edit", new { id=item.Opiskelijanumero }) |
             @Html.ActionLink("Details", "Details", new { id=item.Opiskelijanumero }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Opiskelijanumero })
+            @Html.ActionLink("Poista", "Delete", new { id=item.Opiskelijanumero })
         </td>
     </tr>
 }
