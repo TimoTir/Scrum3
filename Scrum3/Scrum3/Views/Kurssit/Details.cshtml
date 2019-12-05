@@ -1,0 +1,34 @@
+﻿@model Scrum3.Model.Kurssit
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Kurssit</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Kurssi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Kurssi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Laajuus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Laajuus)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.KurssiId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
