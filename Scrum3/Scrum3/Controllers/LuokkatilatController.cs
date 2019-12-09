@@ -153,7 +153,7 @@ namespace Scrum3.Controllers
                 ViewBag.LoginMessage = "Successfull login";
                 ViewBag.LoggedStatus = "In";
                 Session["UserName"] = LoggedUser.UserName;
-                return RedirectToAction("Index", "Logins");
+                return RedirectToAction("Index", "Luokkatilat");
             }
             else
             {
@@ -161,6 +161,7 @@ namespace Scrum3.Controllers
                 ViewBag.LoggedStatus = "Out";
                 LoginsModel.LoginIdErrorMessage = "Tuntematon käyttäjätunnus tai salasana.";
                 return View("Login", LoginsModel);
+                //return View("Index", "Logins");
             }
 
         }

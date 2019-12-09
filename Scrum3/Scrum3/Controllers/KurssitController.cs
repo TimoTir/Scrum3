@@ -17,7 +17,19 @@ namespace Scrum3.Controllers
         // GET: Kurssit
         public ActionResult Index()
         {
-            return View(db.Kurssit.ToList());
+            if (Session["UserName"] == null)
+            {
+                return RedirectToAction("Index", "Logins");
+            }
+            else
+            {
+                ScrumEntities db = new ScrumEntities();
+                List<Kurssit> model = db.Kurssit.ToList();
+                db.Dispose();
+                return View(model);
+                
+            }
+            
         }
 
         // GET: Kurssit/Details/5
@@ -123,5 +135,34 @@ namespace Scrum3.Controllers
             }
             base.Dispose(disposing);
         }
+
+        [HttpPost]
+        public ActionResult Authorize(Logins LoginsModel)
+        {
+            ScrumEntities db = new ScrumEntities();
+
+            var LoggedUser = db.Logins.SingleOrDefault(x => x.UserName == LoginsModel.UserName && x.PassWord == LoginsModel.PassWord);
+            if (LoggedUser != null)
+            {
+                ViewBag.LoginMessage = "Successfull login";
+                ViewBag.LoggedStatus = "In";
+                Session["UserName"] = LoggedUser.UserName;
+                return RedirectToAction("Index", "Logins");
+            }
+            else
+            {
+                ViewBag.LoginMessage = "Login unsuccessfull";
+                ViewBag.LoggedStatus = "Out";
+                LoginsModel.LoginIdErrorMessage = "Tuntematon käyttäjätunnus tai salasana.";
+                return View("Login", LoginsModel);
+            }
+
+        }
+        //public ActionResult LogOut()
+        //{
+        //    Session.Abandon();
+        //    ViewBag.LoggedStatus = "Out";
+        //    return RedirectToAction("Index", "Logins"); //Uloskirjautumisen jälkeen pääsivulle
+        //}
     }
 }
