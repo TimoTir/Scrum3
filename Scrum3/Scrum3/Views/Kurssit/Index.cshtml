@@ -7,7 +7,7 @@
 <h2>Kurssit</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Lisää uusi kurssi", "Create")
 </p>
 <table class="table">
     <tr>
@@ -29,9 +29,9 @@
             @Html.DisplayFor(modelItem => item.Laajuus)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.KurssiId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.KurssiId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.KurssiId })
+            @Html.ActionLink("Muokkaa", "Edit", new { id=item.KurssiId }) |
+            @*@Html.ActionLink("Details", "Details", new { id=item.KurssiId }) |*@
+            @Html.ActionLink("Poista", "Delete", new { id=item.KurssiId })
         </td>
     </tr>
 }
