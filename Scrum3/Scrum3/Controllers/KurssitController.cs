@@ -153,7 +153,7 @@ namespace Scrum3.Controllers
             {
                 ViewBag.LoginMessage = "Login unsuccessfull";
                 ViewBag.LoggedStatus = "Out";
-                //LoginsModel.LoginIdErrorMessage = "Tuntematon käyttäjätunnus tai salasana.";
+                LoginsModel.LoginIdErrorMessage = "Tuntematon käyttäjätunnus tai salasana.";
                 return View("Login", LoginsModel);
             }
 
