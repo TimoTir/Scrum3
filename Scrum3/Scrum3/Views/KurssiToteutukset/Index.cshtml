@@ -1,0 +1,63 @@
+﻿@model IEnumerable<Scrum3.Model.KurssiToteutukset>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Paivamaara)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Kellonaika)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Kurssit.Kurssi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Luokkatilat.Luokka)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Opettajat.Etunimi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Opettajat.Sukunimi)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Paivamaara)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Kellonaika)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Kurssit.Kurssi)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Luokkatilat.Luokka)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Opettajat.Etunimi)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Opettajat.Sukunimi)
+    </td>
+    <td>
+        @Html.ActionLink("Edit", "Edit", new { id = item.KurssitoteutusID }) |
+        @Html.ActionLink("Details", "Details", new { id = item.KurssitoteutusID }) |
+        @Html.ActionLink("Delete", "Delete", new { id = item.KurssitoteutusID })
+    </td>
+</tr>
+}
+
+</table>

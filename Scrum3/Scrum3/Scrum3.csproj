@@ -130,9 +130,11 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KurssitController.cs" />
+    <Compile Include="Controllers\KurssiToteutuksetController.cs" />
     <Compile Include="Controllers\LoginsController.cs" />
     <Compile Include="Controllers\LuokkatilatController.cs" />
     <Compile Include="Controllers\OpiskelijatController.cs" />
+    <Compile Include="Controllers\OsallistumisetController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -249,6 +251,16 @@
     <Content Include="Views\Kurssit\Details.cshtml" />
     <Content Include="Views\Kurssit\Edit.cshtml" />
     <Content Include="Views\Kurssit\Index.cshtml" />
+    <Content Include="Views\Osallistumiset\Create.cshtml" />
+    <Content Include="Views\Osallistumiset\Delete.cshtml" />
+    <Content Include="Views\Osallistumiset\Details.cshtml" />
+    <Content Include="Views\Osallistumiset\Edit.cshtml" />
+    <Content Include="Views\Osallistumiset\Index.cshtml" />
+    <Content Include="Views\KurssiToteutukset\Create.cshtml" />
+    <Content Include="Views\KurssiToteutukset\Delete.cshtml" />
+    <Content Include="Views\KurssiToteutukset\Details.cshtml" />
+    <Content Include="Views\KurssiToteutukset\Edit.cshtml" />
+    <Content Include="Views\KurssiToteutukset\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,58 @@
+﻿@model Scrum3.Model.KurssiToteutukset
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>KurssiToteutukset</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Paivamaara)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Paivamaara)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Kellonaika)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Kellonaika)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Kurssit.Kurssi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Kurssit.Kurssi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Luokkatilat.Luokka)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Luokkatilat.Luokka)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Opettajat.Etunimi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Opettajat.Etunimi)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.KurssitoteutusID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
