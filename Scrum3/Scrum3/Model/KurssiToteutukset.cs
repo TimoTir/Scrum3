@@ -22,10 +22,10 @@ namespace Scrum3.Model
         }
     
         public int KurssitoteutusID { get; set; }
-        public Nullable <System.DateTime> Paivamaara { get; set; }
         [Display(Name = "P‰iv‰m‰‰r‰")]
-        [DisplayFormat(DataFormatString ="{0:dd.MM.yyyy}",ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:dd.MM.yyyy}", ApplyFormatInEditMode = true)]
         [DataType(DataType.Date)]
+        public Nullable <System.DateTime> Paivamaara { get; set; }
         public int Opettaja { get; set; }
         public int Luokka { get; set; }
         public int Kurssi { get; set; }
