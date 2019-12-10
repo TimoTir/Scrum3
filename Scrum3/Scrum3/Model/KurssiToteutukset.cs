@@ -14,13 +14,23 @@ namespace Scrum3.Model
     
     public partial class KurssiToteutukset
     {
-        public string Kurssi { get; set; }
-        public Nullable<System.DateTime> Paivamaara { get; set; }
-        public Nullable<int> Opettaja { get; set; }
-        public Nullable<int> Luokka { get; set; }
-        public Nullable<int> KurssiId { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public KurssiToteutukset()
+        {
+            this.Osallistumiset = new HashSet<Osallistumiset>();
+        }
+    
+        public int KurssitoteutusID { get; set; }
+        public System.DateTime Paivamaara { get; set; }
+        public int Opettaja { get; set; }
+        public int Luokka { get; set; }
+        public int Kurssi { get; set; }
+        public System.TimeSpan Kellonaika { get; set; }
     
         public virtual Kurssit Kurssit { get; set; }
         public virtual Luokkatilat Luokkatilat { get; set; }
+        public virtual Opettajat Opettajat { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Osallistumiset> Osallistumiset { get; set; }
     }
 }

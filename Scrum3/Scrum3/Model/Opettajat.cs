@@ -14,6 +14,12 @@ namespace Scrum3.Model
     
     public partial class Opettajat
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Opettajat()
+        {
+            this.KurssiToteutukset = new HashSet<KurssiToteutukset>();
+        }
+    
         public int HenkiloID { get; set; }
         public string Etunimi { get; set; }
         public string Sukunimi { get; set; }
@@ -21,6 +27,8 @@ namespace Scrum3.Model
         public string Sahkoposti { get; set; }
         public Nullable<int> LoginId { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<KurssiToteutukset> KurssiToteutukset { get; set; }
         public virtual Logins Logins { get; set; }
     }
 }

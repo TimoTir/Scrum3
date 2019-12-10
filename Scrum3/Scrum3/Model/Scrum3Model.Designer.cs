@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\lasse\Source\Repos\Scrum32\Scrum3\Scrum3\Model\ScrumModel.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\timot\source\repos\TimoTir\Scrum3\Scrum3\Scrum3\Model\Scrum3Model.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

@@ -12,7 +12,7 @@ namespace Scrum3.Controllers
 {
     public class OpiskelijatController : Controller
     {
-        private ScrumEntities db = new ScrumEntities();
+        private ScrumEntities1 db = new ScrumEntities1();
 
         // GET: Opiskelijat
         public ActionResult Index()
@@ -23,7 +23,7 @@ namespace Scrum3.Controllers
             }
             else
             {
-                ScrumEntities db = new ScrumEntities();
+                ScrumEntities1 db = new ScrumEntities1();
                 List<Opiskelijat> model = db.Opiskelijat.ToList();
                 db.Dispose();
                 return View(model);
@@ -144,7 +144,7 @@ namespace Scrum3.Controllers
         [HttpPost]
         public ActionResult Authorize(Logins LoginsModel)
         {
-            ScrumEntities db = new ScrumEntities();
+            ScrumEntities1 db = new ScrumEntities1();
 
             var LoggedUser = db.Logins.SingleOrDefault(x => x.UserName == LoginsModel.UserName && x.PassWord == LoginsModel.PassWord);
             if (LoggedUser != null)
@@ -158,7 +158,7 @@ namespace Scrum3.Controllers
             {
                 ViewBag.LoginMessage = "Login unsuccessfull";
                 ViewBag.LoggedStatus = "Out";
-                LoginsModel.LoginIdErrorMessage = "Tuntematon käyttäjätunnus tai salasana.";
+                //LoginsModel.LoginIdErrorMessage = "Tuntematon käyttäjätunnus tai salasana.";
                 return View("Login", LoginsModel);
             }
 

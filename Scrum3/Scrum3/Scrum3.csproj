@@ -137,43 +137,43 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Model\Kurssit.cs">
-      <DependentUpon>ScrumModel.tt</DependentUpon>
+      <DependentUpon>Scrum3Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\KurssiToteutukset.cs">
-      <DependentUpon>ScrumModel.tt</DependentUpon>
+      <DependentUpon>Scrum3Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Logins.cs">
-      <DependentUpon>ScrumModel.tt</DependentUpon>
+      <DependentUpon>Scrum3Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Luokkatilat.cs">
-      <DependentUpon>ScrumModel.tt</DependentUpon>
+      <DependentUpon>Scrum3Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Opettajat.cs">
-      <DependentUpon>ScrumModel.tt</DependentUpon>
+      <DependentUpon>Scrum3Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Opiskelijat.cs">
-      <DependentUpon>ScrumModel.tt</DependentUpon>
+      <DependentUpon>Scrum3Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Osallistumiset.cs">
-      <DependentUpon>ScrumModel.tt</DependentUpon>
+      <DependentUpon>Scrum3Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\PaaKayttajat.cs">
-      <DependentUpon>ScrumModel.tt</DependentUpon>
+      <DependentUpon>Scrum3Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\ScrumModel.Context.cs">
+    <Compile Include="Model\Scrum3Model.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ScrumModel.Context.tt</DependentUpon>
+      <DependentUpon>Scrum3Model.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\ScrumModel.cs">
+    <Compile Include="Model\Scrum3Model.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ScrumModel.tt</DependentUpon>
+      <DependentUpon>Scrum3Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\ScrumModel.Designer.cs">
+    <Compile Include="Model\Scrum3Model.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ScrumModel.edmx</DependentUpon>
+      <DependentUpon>Scrum3Model.edmx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -187,24 +187,24 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Kuvat\Careeria-logo.gif" />
-    <Content Include="Model\ScrumModel.Context.tt">
+    <Content Include="Model\Scrum3Model.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ScrumModel.Context.cs</LastGenOutput>
-      <DependentUpon>ScrumModel.edmx</DependentUpon>
+      <DependentUpon>Scrum3Model.edmx</DependentUpon>
+      <LastGenOutput>Scrum3Model.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Model\ScrumModel.tt">
+    <Content Include="Model\Scrum3Model.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ScrumModel.edmx</DependentUpon>
-      <LastGenOutput>ScrumModel.cs</LastGenOutput>
+      <DependentUpon>Scrum3Model.edmx</DependentUpon>
+      <LastGenOutput>Scrum3Model.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EntityDeploy Include="Model\ScrumModel.edmx">
+    <EntityDeploy Include="Model\Scrum3Model.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ScrumModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>Scrum3Model.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Model\ScrumModel.edmx.diagram">
-      <DependentUpon>ScrumModel.edmx</DependentUpon>
+    <Content Include="Model\Scrum3Model.edmx.diagram">
+      <DependentUpon>Scrum3Model.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />

@@ -13,10 +13,10 @@ namespace Scrum3.Model
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class ScrumEntities : DbContext
+    public partial class ScrumEntities1 : DbContext
     {
-        public ScrumEntities()
-            : base("name=ScrumEntities")
+        public ScrumEntities1()
+            : base("name=ScrumEntities1")
         {
         }
     

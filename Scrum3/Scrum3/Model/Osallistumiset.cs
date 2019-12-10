@@ -14,12 +14,11 @@ namespace Scrum3.Model
     
     public partial class Osallistumiset
     {
-        public int ID { get; set; }
-        public int Oppilas { get; set; }
-        public string Osallistuminen { get; set; }
-        public Nullable<int> Arvosana { get; set; }
+        public int OsallistumisetID { get; set; }
+        public int KurssitoteutusID { get; set; }
+        public int OppilasID { get; set; }
     
-        public virtual Kurssit Kurssit { get; set; }
+        public virtual KurssiToteutukset KurssiToteutukset { get; set; }
         public virtual Opiskelijat Opiskelijat { get; set; }
     }
 }

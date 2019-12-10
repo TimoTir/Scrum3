@@ -18,7 +18,6 @@ namespace Scrum3.Model
         public Kurssit()
         {
             this.KurssiToteutukset = new HashSet<KurssiToteutukset>();
-            this.Osallistumiset = new HashSet<Osallistumiset>();
         }
     
         public string Kurssi { get; set; }
@@ -27,7 +26,5 @@ namespace Scrum3.Model
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<KurssiToteutukset> KurssiToteutukset { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Osallistumiset> Osallistumiset { get; set; }
     }
 }

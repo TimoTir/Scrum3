@@ -15,13 +15,14 @@
         </EntityType>
         <EntityType Name="KurssiToteutukset">
           <Key>
-            <PropertyRef Name="Kurssi" />
+            <PropertyRef Name="KurssitoteutusID" />
           </Key>
-          <Property Name="Kurssi" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="Paivamaara" Type="date" />
-          <Property Name="Opettaja" Type="int" />
-          <Property Name="Luokka" Type="int" />
-          <Property Name="KurssiId" Type="int" />
+          <Property Name="KurssitoteutusID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Paivamaara" Type="date" Nullable="false" />
+          <Property Name="Opettaja" Type="int" Nullable="false" />
+          <Property Name="Luokka" Type="int" Nullable="false" />
+          <Property Name="Kurssi" Type="int" Nullable="false" />
+          <Property Name="Kellonaika" Type="time" Precision="0" Nullable="false" />
         </EntityType>
         <EntityType Name="Logins">
           <Key>
@@ -43,7 +44,7 @@
           <Key>
             <PropertyRef Name="HenkiloID" />
           </Key>
-          <Property Name="HenkiloID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HenkiloID" Type="int" Nullable="false" />
           <Property Name="Etunimi" Type="varchar" MaxLength="25" Nullable="false" />
           <Property Name="Sukunimi" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Puhelin" Type="varchar" MaxLength="20" />
@@ -63,12 +64,11 @@
         </EntityType>
         <EntityType Name="Osallistumiset">
           <Key>
-            <PropertyRef Name="Osallistuminen" />
+            <PropertyRef Name="OsallistumisetID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
-          <Property Name="Oppilas" Type="int" Nullable="false" />
-          <Property Name="Osallistuminen" Type="varchar" MaxLength="5" Nullable="false" />
-          <Property Name="Arvosana" Type="int" />
+          <Property Name="OsallistumisetID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KurssitoteutusID" Type="int" Nullable="false" />
+          <Property Name="OppilasID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="PaaKayttajat">
           <Key>
@@ -81,20 +81,20 @@
           <Property Name="Sahkoposti" Type="varchar" MaxLength="50" />
           <Property Name="LoginId" Type="int" />
         </EntityType>
-        <Association Name="FK__KurssiTot__Kurss__440B1D61">
-          <End Role="Kurssit" Type="Self.Kurssit" Multiplicity="0..1" />
+        <Association Name="FK__KurssiTot__Kurss__10566F31">
+          <End Role="Kurssit" Type="Self.Kurssit" Multiplicity="1" />
           <End Role="KurssiToteutukset" Type="Self.KurssiToteutukset" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Kurssit">
               <PropertyRef Name="KurssiId" />
             </Principal>
             <Dependent Role="KurssiToteutukset">
-              <PropertyRef Name="KurssiId" />
+              <PropertyRef Name="Kurssi" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__KurssiTot__Luokk__4222D4EF">
-          <End Role="Luokkatilat" Type="Self.Luokkatilat" Multiplicity="0..1" />
+        <Association Name="FK__KurssiTot__Luokk__114A936A">
+          <End Role="Luokkatilat" Type="Self.Luokkatilat" Multiplicity="1" />
           <End Role="KurssiToteutukset" Type="Self.KurssiToteutukset" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Luokkatilat">
@@ -102,6 +102,18 @@
             </Principal>
             <Dependent Role="KurssiToteutukset">
               <PropertyRef Name="Luokka" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__KurssiTot__Opett__6D0D32F4">
+          <End Role="Opettajat" Type="Self.Opettajat" Multiplicity="1" />
+          <End Role="KurssiToteutukset" Type="Self.KurssiToteutukset" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Opettajat">
+              <PropertyRef Name="HenkiloID" />
+            </Principal>
+            <Dependent Role="KurssiToteutukset">
+              <PropertyRef Name="Opettaja" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -129,18 +141,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Osallistu__Oppil__4316F928">
-          <End Role="Opiskelijat" Type="Self.Opiskelijat" Multiplicity="1" />
-          <End Role="Osallistumiset" Type="Self.Osallistumiset" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Opiskelijat">
-              <PropertyRef Name="Opiskelijanumero" />
-            </Principal>
-            <Dependent Role="Osallistumiset">
-              <PropertyRef Name="Oppilas" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__PaaKaytta__Login__628FA481">
           <End Role="Logins" Type="Self.Logins" Multiplicity="0..1" />
           <End Role="PaaKayttajat" Type="Self.PaaKayttajat" Multiplicity="*" />
@@ -153,15 +153,27 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ID">
-          <End Role="Kurssit" Type="Self.Kurssit" Multiplicity="1" />
+        <Association Name="FK_Osallistumiset_KurssiToteutukset">
+          <End Role="KurssiToteutukset" Type="Self.KurssiToteutukset" Multiplicity="1" />
           <End Role="Osallistumiset" Type="Self.Osallistumiset" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Kurssit">
-              <PropertyRef Name="KurssiId" />
+            <Principal Role="KurssiToteutukset">
+              <PropertyRef Name="KurssitoteutusID" />
             </Principal>
             <Dependent Role="Osallistumiset">
-              <PropertyRef Name="ID" />
+              <PropertyRef Name="KurssitoteutusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Osallistumiset_Oppilas">
+          <End Role="Opiskelijat" Type="Self.Opiskelijat" Multiplicity="1" />
+          <End Role="Osallistumiset" Type="Self.Osallistumiset" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Opiskelijat">
+              <PropertyRef Name="Opiskelijanumero" />
+            </Principal>
+            <Dependent Role="Osallistumiset">
+              <PropertyRef Name="OppilasID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -174,12 +186,16 @@
           <EntitySet Name="Opiskelijat" EntityType="Self.Opiskelijat" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Osallistumiset" EntityType="Self.Osallistumiset" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PaaKayttajat" EntityType="Self.PaaKayttajat" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__KurssiTot__Kurss__440B1D61" Association="Self.FK__KurssiTot__Kurss__440B1D61">
+          <AssociationSet Name="FK__KurssiTot__Kurss__10566F31" Association="Self.FK__KurssiTot__Kurss__10566F31">
             <End Role="Kurssit" EntitySet="Kurssit" />
             <End Role="KurssiToteutukset" EntitySet="KurssiToteutukset" />
           </AssociationSet>
-          <AssociationSet Name="FK__KurssiTot__Luokk__4222D4EF" Association="Self.FK__KurssiTot__Luokk__4222D4EF">
+          <AssociationSet Name="FK__KurssiTot__Luokk__114A936A" Association="Self.FK__KurssiTot__Luokk__114A936A">
             <End Role="Luokkatilat" EntitySet="Luokkatilat" />
+            <End Role="KurssiToteutukset" EntitySet="KurssiToteutukset" />
+          </AssociationSet>
+          <AssociationSet Name="FK__KurssiTot__Opett__6D0D32F4" Association="Self.FK__KurssiTot__Opett__6D0D32F4">
+            <End Role="Opettajat" EntitySet="Opettajat" />
             <End Role="KurssiToteutukset" EntitySet="KurssiToteutukset" />
           </AssociationSet>
           <AssociationSet Name="FK__Opettajat__Login__619B8048" Association="Self.FK__Opettajat__Login__619B8048">
@@ -190,16 +206,16 @@
             <End Role="Logins" EntitySet="Logins" />
             <End Role="Opiskelijat" EntitySet="Opiskelijat" />
           </AssociationSet>
-          <AssociationSet Name="FK__Osallistu__Oppil__4316F928" Association="Self.FK__Osallistu__Oppil__4316F928">
-            <End Role="Opiskelijat" EntitySet="Opiskelijat" />
-            <End Role="Osallistumiset" EntitySet="Osallistumiset" />
-          </AssociationSet>
           <AssociationSet Name="FK__PaaKaytta__Login__628FA481" Association="Self.FK__PaaKaytta__Login__628FA481">
             <End Role="Logins" EntitySet="Logins" />
             <End Role="PaaKayttajat" EntitySet="PaaKayttajat" />
           </AssociationSet>
-          <AssociationSet Name="FK_ID" Association="Self.FK_ID">
-            <End Role="Kurssit" EntitySet="Kurssit" />
+          <AssociationSet Name="FK_Osallistumiset_KurssiToteutukset" Association="Self.FK_Osallistumiset_KurssiToteutukset">
+            <End Role="KurssiToteutukset" EntitySet="KurssiToteutukset" />
+            <End Role="Osallistumiset" EntitySet="Osallistumiset" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Osallistumiset_Oppilas" Association="Self.FK_Osallistumiset_Oppilas">
+            <End Role="Opiskelijat" EntitySet="Opiskelijat" />
             <End Role="Osallistumiset" EntitySet="Osallistumiset" />
           </AssociationSet>
         </EntityContainer>
@@ -215,20 +231,22 @@
           <Property Name="Kurssi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Laajuus" Type="Int32" />
           <Property Name="KurssiId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="KurssiToteutukset" Relationship="Self.FK__KurssiTot__Kurss__440B1D61" FromRole="Kurssit" ToRole="KurssiToteutukset" />
-          <NavigationProperty Name="Osallistumiset" Relationship="Self.FK_ID" FromRole="Kurssit" ToRole="Osallistumiset" />
+          <NavigationProperty Name="KurssiToteutukset" Relationship="Self.FK__KurssiTot__Kurss__10566F31" FromRole="Kurssit" ToRole="KurssiToteutukset" />
         </EntityType>
         <EntityType Name="KurssiToteutukset">
           <Key>
-            <PropertyRef Name="Kurssi" />
+            <PropertyRef Name="KurssitoteutusID" />
           </Key>
-          <Property Name="Kurssi" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Paivamaara" Type="DateTime" Precision="0" />
-          <Property Name="Opettaja" Type="Int32" />
-          <Property Name="Luokka" Type="Int32" />
-          <Property Name="KurssiId" Type="Int32" />
-          <NavigationProperty Name="Kurssit" Relationship="Self.FK__KurssiTot__Kurss__440B1D61" FromRole="KurssiToteutukset" ToRole="Kurssit" />
-          <NavigationProperty Name="Luokkatilat" Relationship="Self.FK__KurssiTot__Luokk__4222D4EF" FromRole="KurssiToteutukset" ToRole="Luokkatilat" />
+          <Property Name="KurssitoteutusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Paivamaara" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Opettaja" Type="Int32" Nullable="false" />
+          <Property Name="Luokka" Type="Int32" Nullable="false" />
+          <Property Name="Kurssi" Type="Int32" Nullable="false" />
+          <Property Name="Kellonaika" Type="Time" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Kurssit" Relationship="Self.FK__KurssiTot__Kurss__10566F31" FromRole="KurssiToteutukset" ToRole="Kurssit" />
+          <NavigationProperty Name="Luokkatilat" Relationship="Self.FK__KurssiTot__Luokk__114A936A" FromRole="KurssiToteutukset" ToRole="Luokkatilat" />
+          <NavigationProperty Name="Opettajat" Relationship="Self.FK__KurssiTot__Opett__6D0D32F4" FromRole="KurssiToteutukset" ToRole="Opettajat" />
+          <NavigationProperty Name="Osallistumiset" Relationship="Self.FK_Osallistumiset_KurssiToteutukset" FromRole="KurssiToteutukset" ToRole="Osallistumiset" />
         </EntityType>
         <EntityType Name="Logins">
           <Key>
@@ -248,18 +266,19 @@
           </Key>
           <Property Name="Luokka" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="LuokkaID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="KurssiToteutukset" Relationship="Self.FK__KurssiTot__Luokk__4222D4EF" FromRole="Luokkatilat" ToRole="KurssiToteutukset" />
+          <NavigationProperty Name="KurssiToteutukset" Relationship="Self.FK__KurssiTot__Luokk__114A936A" FromRole="Luokkatilat" ToRole="KurssiToteutukset" />
         </EntityType>
         <EntityType Name="Opettajat">
           <Key>
             <PropertyRef Name="HenkiloID" />
           </Key>
-          <Property Name="HenkiloID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HenkiloID" Type="Int32" Nullable="false" />
           <Property Name="Etunimi" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Sukunimi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Puhelin" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="Sahkoposti" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="LoginId" Type="Int32" />
+          <NavigationProperty Name="KurssiToteutukset" Relationship="Self.FK__KurssiTot__Opett__6D0D32F4" FromRole="Opettajat" ToRole="KurssiToteutukset" />
           <NavigationProperty Name="Logins" Relationship="Self.FK__Opettajat__Login__619B8048" FromRole="Opettajat" ToRole="Logins" />
         </EntityType>
         <EntityType Name="Opiskelijat">
@@ -273,18 +292,17 @@
           <Property Name="Sahkoposti" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="LoginId" Type="Int32" />
           <NavigationProperty Name="Logins" Relationship="Self.FK__Opiskelij__Login__3D5E1FD2" FromRole="Opiskelijat" ToRole="Logins" />
-          <NavigationProperty Name="Osallistumiset" Relationship="Self.FK__Osallistu__Oppil__4316F928" FromRole="Opiskelijat" ToRole="Osallistumiset" />
+          <NavigationProperty Name="Osallistumiset" Relationship="Self.FK_Osallistumiset_Oppilas" FromRole="Opiskelijat" ToRole="Osallistumiset" />
         </EntityType>
         <EntityType Name="Osallistumiset">
           <Key>
-            <PropertyRef Name="Osallistuminen" />
+            <PropertyRef Name="OsallistumisetID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
-          <Property Name="Oppilas" Type="Int32" Nullable="false" />
-          <Property Name="Osallistuminen" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Arvosana" Type="Int32" />
-          <NavigationProperty Name="Kurssit" Relationship="Self.FK_ID" FromRole="Osallistumiset" ToRole="Kurssit" />
-          <NavigationProperty Name="Opiskelijat" Relationship="Self.FK__Osallistu__Oppil__4316F928" FromRole="Osallistumiset" ToRole="Opiskelijat" />
+          <Property Name="OsallistumisetID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KurssitoteutusID" Type="Int32" Nullable="false" />
+          <Property Name="OppilasID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="KurssiToteutukset" Relationship="Self.FK_Osallistumiset_KurssiToteutukset" FromRole="Osallistumiset" ToRole="KurssiToteutukset" />
+          <NavigationProperty Name="Opiskelijat" Relationship="Self.FK_Osallistumiset_Oppilas" FromRole="Osallistumiset" ToRole="Opiskelijat" />
         </EntityType>
         <EntityType Name="PaaKayttajat">
           <Key>
@@ -298,32 +316,20 @@
           <Property Name="LoginId" Type="Int32" />
           <NavigationProperty Name="Logins" Relationship="Self.FK__PaaKaytta__Login__628FA481" FromRole="PaaKayttajat" ToRole="Logins" />
         </EntityType>
-        <Association Name="FK__KurssiTot__Kurss__440B1D61">
-          <End Role="Kurssit" Type="Self.Kurssit" Multiplicity="0..1" />
+        <Association Name="FK__KurssiTot__Kurss__10566F31">
+          <End Role="Kurssit" Type="Self.Kurssit" Multiplicity="1" />
           <End Role="KurssiToteutukset" Type="Self.KurssiToteutukset" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Kurssit">
               <PropertyRef Name="KurssiId" />
             </Principal>
             <Dependent Role="KurssiToteutukset">
-              <PropertyRef Name="KurssiId" />
+              <PropertyRef Name="Kurssi" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ID">
-          <End Role="Kurssit" Type="Self.Kurssit" Multiplicity="1" />
-          <End Role="Osallistumiset" Type="Self.Osallistumiset" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Kurssit">
-              <PropertyRef Name="KurssiId" />
-            </Principal>
-            <Dependent Role="Osallistumiset">
-              <PropertyRef Name="ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__KurssiTot__Luokk__4222D4EF">
-          <End Role="Luokkatilat" Type="Self.Luokkatilat" Multiplicity="0..1" />
+        <Association Name="FK__KurssiTot__Luokk__114A936A">
+          <End Role="Luokkatilat" Type="Self.Luokkatilat" Multiplicity="1" />
           <End Role="KurssiToteutukset" Type="Self.KurssiToteutukset" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Luokkatilat">
@@ -331,6 +337,30 @@
             </Principal>
             <Dependent Role="KurssiToteutukset">
               <PropertyRef Name="Luokka" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__KurssiTot__Opett__6D0D32F4">
+          <End Role="Opettajat" Type="Self.Opettajat" Multiplicity="1" />
+          <End Role="KurssiToteutukset" Type="Self.KurssiToteutukset" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Opettajat">
+              <PropertyRef Name="HenkiloID" />
+            </Principal>
+            <Dependent Role="KurssiToteutukset">
+              <PropertyRef Name="Opettaja" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Osallistumiset_KurssiToteutukset">
+          <End Role="KurssiToteutukset" Type="Self.KurssiToteutukset" Multiplicity="1" />
+          <End Role="Osallistumiset" Type="Self.Osallistumiset" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KurssiToteutukset">
+              <PropertyRef Name="KurssitoteutusID" />
+            </Principal>
+            <Dependent Role="Osallistumiset">
+              <PropertyRef Name="KurssitoteutusID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -370,7 +400,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Osallistu__Oppil__4316F928">
+        <Association Name="FK_Osallistumiset_Oppilas">
           <End Role="Opiskelijat" Type="Self.Opiskelijat" Multiplicity="1" />
           <End Role="Osallistumiset" Type="Self.Osallistumiset" Multiplicity="*" />
           <ReferentialConstraint>
@@ -378,11 +408,11 @@
               <PropertyRef Name="Opiskelijanumero" />
             </Principal>
             <Dependent Role="Osallistumiset">
-              <PropertyRef Name="Oppilas" />
+              <PropertyRef Name="OppilasID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="ScrumEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="ScrumEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Kurssit" EntityType="Self.Kurssit" />
           <EntitySet Name="KurssiToteutukset" EntityType="Self.KurssiToteutukset" />
           <EntitySet Name="Logins" EntityType="Self.Logins" />
@@ -391,17 +421,21 @@
           <EntitySet Name="Opiskelijat" EntityType="Self.Opiskelijat" />
           <EntitySet Name="Osallistumiset" EntityType="Self.Osallistumiset" />
           <EntitySet Name="PaaKayttajat" EntityType="Self.PaaKayttajat" />
-          <AssociationSet Name="FK__KurssiTot__Kurss__440B1D61" Association="Self.FK__KurssiTot__Kurss__440B1D61">
+          <AssociationSet Name="FK__KurssiTot__Kurss__10566F31" Association="Self.FK__KurssiTot__Kurss__10566F31">
             <End Role="Kurssit" EntitySet="Kurssit" />
             <End Role="KurssiToteutukset" EntitySet="KurssiToteutukset" />
           </AssociationSet>
-          <AssociationSet Name="FK_ID" Association="Self.FK_ID">
-            <End Role="Kurssit" EntitySet="Kurssit" />
-            <End Role="Osallistumiset" EntitySet="Osallistumiset" />
-          </AssociationSet>
-          <AssociationSet Name="FK__KurssiTot__Luokk__4222D4EF" Association="Self.FK__KurssiTot__Luokk__4222D4EF">
+          <AssociationSet Name="FK__KurssiTot__Luokk__114A936A" Association="Self.FK__KurssiTot__Luokk__114A936A">
             <End Role="Luokkatilat" EntitySet="Luokkatilat" />
             <End Role="KurssiToteutukset" EntitySet="KurssiToteutukset" />
+          </AssociationSet>
+          <AssociationSet Name="FK__KurssiTot__Opett__6D0D32F4" Association="Self.FK__KurssiTot__Opett__6D0D32F4">
+            <End Role="Opettajat" EntitySet="Opettajat" />
+            <End Role="KurssiToteutukset" EntitySet="KurssiToteutukset" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Osallistumiset_KurssiToteutukset" Association="Self.FK_Osallistumiset_KurssiToteutukset">
+            <End Role="KurssiToteutukset" EntitySet="KurssiToteutukset" />
+            <End Role="Osallistumiset" EntitySet="Osallistumiset" />
           </AssociationSet>
           <AssociationSet Name="FK__Opettajat__Login__619B8048" Association="Self.FK__Opettajat__Login__619B8048">
             <End Role="Logins" EntitySet="Logins" />
@@ -415,7 +449,7 @@
             <End Role="Logins" EntitySet="Logins" />
             <End Role="PaaKayttajat" EntitySet="PaaKayttajat" />
           </AssociationSet>
-          <AssociationSet Name="FK__Osallistu__Oppil__4316F928" Association="Self.FK__Osallistu__Oppil__4316F928">
+          <AssociationSet Name="FK_Osallistumiset_Oppilas" Association="Self.FK_Osallistumiset_Oppilas">
             <End Role="Opiskelijat" EntitySet="Opiskelijat" />
             <End Role="Osallistumiset" EntitySet="Osallistumiset" />
           </AssociationSet>
@@ -425,7 +459,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="ScrumModelStoreContainer" CdmEntityContainer="ScrumEntities">
+        <EntityContainerMapping StorageEntityContainer="ScrumModelStoreContainer" CdmEntityContainer="ScrumEntities1">
           <EntitySetMapping Name="Kurssit">
             <EntityTypeMapping TypeName="ScrumModel.Kurssit">
               <MappingFragment StoreEntitySet="Kurssit">
@@ -438,11 +472,12 @@
           <EntitySetMapping Name="KurssiToteutukset">
             <EntityTypeMapping TypeName="ScrumModel.KurssiToteutukset">
               <MappingFragment StoreEntitySet="KurssiToteutukset">
-                <ScalarProperty Name="Kurssi" ColumnName="Kurssi" />
+                <ScalarProperty Name="KurssitoteutusID" ColumnName="KurssitoteutusID" />
                 <ScalarProperty Name="Paivamaara" ColumnName="Paivamaara" />
                 <ScalarProperty Name="Opettaja" ColumnName="Opettaja" />
                 <ScalarProperty Name="Luokka" ColumnName="Luokka" />
-                <ScalarProperty Name="KurssiId" ColumnName="KurssiId" />
+                <ScalarProperty Name="Kurssi" ColumnName="Kurssi" />
+                <ScalarProperty Name="Kellonaika" ColumnName="Kellonaika" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -491,10 +526,9 @@
           <EntitySetMapping Name="Osallistumiset">
             <EntityTypeMapping TypeName="ScrumModel.Osallistumiset">
               <MappingFragment StoreEntitySet="Osallistumiset">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Oppilas" ColumnName="Oppilas" />
-                <ScalarProperty Name="Osallistuminen" ColumnName="Osallistuminen" />
-                <ScalarProperty Name="Arvosana" ColumnName="Arvosana" />
+                <ScalarProperty Name="OsallistumisetID" ColumnName="OsallistumisetID" />
+                <ScalarProperty Name="KurssitoteutusID" ColumnName="KurssitoteutusID" />
+                <ScalarProperty Name="OppilasID" ColumnName="OppilasID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

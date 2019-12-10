@@ -32,7 +32,7 @@ namespace Scrum3.Controllers
         {
             var x = "";
 
-            ScrumEntities db = new ScrumEntities();
+            ScrumEntities1 db = new ScrumEntities1();
             var a = from b in db.Opiskelijat
                     select b;
             foreach (var s in a)

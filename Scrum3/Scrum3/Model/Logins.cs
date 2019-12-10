@@ -11,8 +11,7 @@ namespace Scrum3.Model
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Logins
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -24,12 +23,8 @@ namespace Scrum3.Model
         }
     
         public int LoginId { get; set; }
-        [Required(ErrorMessage = "Anna käyttäjätunnus!")]
         public string UserName { get; set; }
-        [DataType(DataType.Password)]
-        [Required(ErrorMessage = "Anna salasana!")]
         public string PassWord { get; set; }
-        public string LoginErrorMessage { get; set; }
         public int AccessLevel { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -38,6 +33,5 @@ namespace Scrum3.Model
         public virtual ICollection<Opiskelijat> Opiskelijat { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PaaKayttajat> PaaKayttajat { get; set; }
-        public string LoginIdErrorMessage { get; internal set; }
     }
 }
