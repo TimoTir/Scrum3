@@ -17,8 +17,17 @@ namespace Scrum3.Controllers
         // GET: Osallistumiset
         public ActionResult Index()
         {
-            var osallistumiset = db.Osallistumiset.Include(o => o.KurssiToteutukset).Include(o => o.Opiskelijat);
-            return View(osallistumiset.ToList());
+            int oppi = (int)Session["LoginId"];
+            if ((Session["UserName"] == null) || (Session["AccessLevel"].ToString() != "3"))
+                {
+                var osallistumiset = db.Osallistumiset.Include(o => o.KurssiToteutukset).Include(o => o.Opiskelijat);
+                return View(osallistumiset.ToList()); 
+            } else
+            {
+                var osallistumiset = db.Osallistumiset.Include(o => o.KurssiToteutukset).Include(o => o.Opiskelijat).Where(o => o.OppilasID == oppi);
+                return View(osallistumiset.ToList());
+            }
+
         }
 
         // GET: Osallistumiset/Details/5
