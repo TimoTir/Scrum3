@@ -24,7 +24,11 @@ namespace Scrum3.Controllers
             {
                 ViewBag.LoginMessage = "Successfull login";
                 ViewBag.LoggedStatus = "In";
+                ViewBag.Acceslevel = LoggedUser.AccessLevel;
+                ViewBag.LoginId = LoggedUser.LoginId;
                 Session["UserName"] = LoggedUser.UserName;
+                Session["Accesslevel"] = LoggedUser.AccessLevel.ToString();
+                Session["LoginId"] = LoggedUser.LoginId;
                 return RedirectToAction("Index", "Home");
             }
             else

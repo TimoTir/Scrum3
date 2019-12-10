@@ -17,7 +17,7 @@ namespace Scrum3.Controllers
         // GET: Kurssit
         public ActionResult Index()
         {
-            if (Session["UserName"] == null)
+            if ((Session["UserName"] == null) || (Session["AccessLevel"].ToString() != "1"))
             {
                 return RedirectToAction("Index", "Logins");
             }
