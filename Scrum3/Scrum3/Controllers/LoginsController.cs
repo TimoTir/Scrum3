@@ -14,6 +14,11 @@ namespace Scrum3.Controllers
         {
             return View();
         }
+
+        public ActionResult Käyttäjätunnukset()
+        {
+            return View();
+        }
         [HttpPost]
         public ActionResult Authorize(Logins LoginsModel)
         {

@@ -60,7 +60,7 @@ namespace Scrum3.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Opiskelijanumero,Etunimi,Sukunimi,Puhelin,Sahkoposti,LoginId")] Opiskelijat opiskelijat)
+        public ActionResult Create([Bind(Include = "Opiskelijanumero,Etunimi,Sukunimi,Puhelin,Sahkoposti,LoginId,Käyttäjätunnus")] Opiskelijat opiskelijat)
         {
             if (ModelState.IsValid)
             {

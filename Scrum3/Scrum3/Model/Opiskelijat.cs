@@ -25,10 +25,13 @@ namespace Scrum3.Model
         public string Sukunimi { get; set; }
         public string Puhelin { get; set; }
         public string Sahkoposti { get; set; }
+        public string UserName { get; set; }
         public Nullable<int> LoginId { get; set; }
     
         public virtual Logins Logins { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Osallistumiset> Osallistumiset { get; set; }
+
+
     }
 }

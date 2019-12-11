@@ -12,6 +12,9 @@
 <table class="table table-hover">
     <tr>
         <th>
+            @Html.DisplayNameFor(model => model.Opiskelijanumero)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.Etunimi)
         </th>
         <th>
@@ -24,13 +27,19 @@
             @Html.DisplayNameFor(model => model.Sahkoposti)
         </th>
         <th>
-            @*@Html.DisplayNameFor(model => model.Logins.UserName)*@
+            @Html.DisplayNameFor(model => model.LoginId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserName)
         </th>
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
+        <td>
+            @Html.DisplayFor(modelItem =>item.Opiskelijanumero)
+        </td>
         <td>
             @Html.DisplayFor(modelItem => item.Etunimi)
         </td>
@@ -44,11 +53,14 @@
             @Html.DisplayFor(modelItem => item.Sahkoposti)
         </td>
         <td>
-            @*@Html.DisplayFor(modelItem => item.Logins.UserName)*@
+            @Html.DisplayFor(modelItem => item.LoginId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserName)
         </td>
         <td>
             @Html.ActionLink("Muokkaa", "Edit", new { id=item.Opiskelijanumero }) |
-            @*@Html.ActionLink("Details", "Details", new { id=item.Opiskelijanumero }) |*@
+            @Html.ActionLink("Details", "Details", new { id=item.Opiskelijanumero }) |
             @Html.ActionLink("Poista", "Delete", new { id=item.Opiskelijanumero })
         </td>
     </tr>
