@@ -34,6 +34,29 @@ namespace Scrum3.Controllers
                 Session["UserName"] = LoggedUser.UserName;
                 Session["Accesslevel"] = LoggedUser.AccessLevel.ToString();
                 Session["LoginId"] = LoggedUser.LoginId;
+                if (LoggedUser.AccessLevel.ToString() == "1")
+                {
+                    //Admin
+                }
+                else if (LoggedUser.AccessLevel.ToString() == "2")
+                {
+                    //Opettaja
+                }
+                else if (LoggedUser.AccessLevel.ToString() == "3")
+                {
+                    //Opiskelija
+                    int opiskelijaId;
+                    int LoginId = LoggedUser.LoginId;
+                    Opiskelijat opisk = new Opiskelijat();
+                    opisk = db.Opiskelijat.Where(o => o.LoginId == LoginId).FirstOrDefault();
+                    opiskelijaId = opisk.Opiskelijanumero;
+                    Session["opiskelijaId"] = opiskelijaId;
+                    Session["KirjautunutKayttajaNimi"] = opisk.Etunimi + " " + opisk.Sukunimi;
+                } else
+                {
+                    //Vihre
+                }
+
                 return RedirectToAction("Index", "Home");
             }
             else

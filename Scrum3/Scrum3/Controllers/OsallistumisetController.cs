@@ -7,7 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Scrum3.Model;
-
+using Scrum3.ViewModels;
 namespace Scrum3.Controllers
 {
     public class OsallistumisetController : Controller
@@ -17,15 +17,46 @@ namespace Scrum3.Controllers
         // GET: Osallistumiset
         public ActionResult Index()
         {
-            int oppi = (int)Session["LoginId"];
+            
             if ((Session["UserName"] == null) || (Session["AccessLevel"].ToString() != "3"))
                 {
-                var osallistumiset = db.Osallistumiset.Include(o => o.KurssiToteutukset).Include(o => o.Opiskelijat);
-                return View(osallistumiset.ToList()); 
+                var osallistumiset = from os in db.Osallistumiset
+                                      join kt in db.KurssiToteutukset on os.KurssitoteutusID equals kt.KurssitoteutusID
+                                      join ku in db.Kurssit on kt.Kurssi equals ku.KurssiId
+                                      join op in db.Opiskelijat on os.OppilasID equals op.Opiskelijanumero
+                                      select new OsallistumisetVM
+                                      {
+                                          KurssitoteutusID = kt.KurssitoteutusID,
+                                          Kurssi = ku.Kurssi,
+                                          Laajuus = (int)ku.Laajuus,
+                                          Paivamaara = (DateTime)kt.Paivamaara,
+                                          Etunimi = op.Etunimi,
+                                          Sukunimi = op.Sukunimi,
+                                          OsallistumisetID = os.OsallistumisetID
+                                      };
+
+                //var osallistumiset = db.Osallistumiset.Include(o => o.KurssiToteutukset).Include(o => o.Opiskelijat);
+                return View(osallistumiset); 
             } else
             {
-                var osallistumiset = db.Osallistumiset.Include(o => o.KurssiToteutukset).Include(o => o.Opiskelijat).Where(o => o.OppilasID == oppi);
-                return View(osallistumiset.ToList());
+                int oppi = (int)Session["opiskelijaId"];
+                var osallistumiset = from os in db.Osallistumiset
+                                      join kt in db.KurssiToteutukset on os.KurssitoteutusID equals kt.KurssitoteutusID
+                                      join ku in db.Kurssit on kt.Kurssi equals ku.KurssiId
+                                      join op in db.Opiskelijat on os.OppilasID equals op.Opiskelijanumero
+                                      where os.OppilasID == oppi
+                                      select new OsallistumisetVM
+                                      {
+                                          KurssitoteutusID = kt.KurssitoteutusID,
+                                          Kurssi = ku.Kurssi,
+                                          Laajuus = (int)ku.Laajuus,
+                                          Paivamaara = (DateTime)kt.Paivamaara,
+                                          Etunimi = op.Etunimi,
+                                          Sukunimi = op.Sukunimi,
+                                          OsallistumisetID = os.OsallistumisetID
+                                      };
+                //var osallistumiset = db.Osallistumiset.Include(o => o.KurssiToteutukset).Include(o => o.Opiskelijat).Where(o => o.OppilasID == oppi);
+                return View(osallistumiset);
             }
 
         }
@@ -48,7 +79,19 @@ namespace Scrum3.Controllers
         // GET: Osallistumiset/Create
         public ActionResult Create()
         {
-            ViewBag.KurssitoteutusID = new SelectList(db.KurssiToteutukset, "KurssitoteutusID", "KurssitoteutusID");
+            var multihaku = db.KurssiToteutukset.Include(k => k.Kurssit);
+            List<SelectListItem> kurssitoteutukset = new List<SelectListItem>();
+            foreach (var kurssitotteutus in multihaku.ToList())
+            {
+                kurssitoteutukset.Add(new SelectListItem
+                {
+                    Value = kurssitotteutus.KurssitoteutusID.ToString(),
+                    Text = kurssitotteutus.KurssitoteutusID.ToString() + " " + kurssitotteutus.Kurssit.Kurssi + " - " + kurssitotteutus.Paivamaara.ToString()
+                });
+            }
+
+            ViewBag.KurssitoteutusID = new SelectList(kurssitoteutukset, "Value", "Text");
+            //ViewBag.KurssitoteutusID = new SelectList(db.KurssiToteutukset, "KurssitoteutusID", "KurssitoteutusID");
             ViewBag.OppilasID = new SelectList(db.Opiskelijat, "Opiskelijanumero", "Etunimi");
             return View();
         }
@@ -62,6 +105,11 @@ namespace Scrum3.Controllers
         {
             if (ModelState.IsValid)
             {
+                if ((string)Session["Accesslevel"] == "3")
+                {
+                    osallistumiset.OppilasID = (int)Session["opiskelijaId"];
+                }
+
                 db.Osallistumiset.Add(osallistumiset);
                 db.SaveChanges();
                 return RedirectToAction("Index");
