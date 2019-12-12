@@ -17,8 +17,19 @@ namespace Scrum3.Controllers
         // GET: KurssiToteutukset
         public ActionResult Index()
         {
-            var kurssiToteutukset = db.KurssiToteutukset.Include(k => k.Kurssit).Include(k => k.Luokkatilat).Include(k => k.Opettajat);
-            return View(kurssiToteutukset.ToList());
+            if ((Session["UserName"] == null) || (Session["AccessLevel"].ToString() != "1"))
+            {
+                return RedirectToAction("Index", "Logins");
+            }
+            else
+            {
+                ScrumEntities1 db = new ScrumEntities1();
+                List<KurssiToteutukset> model = db.KurssiToteutukset.ToList();
+                db.Dispose();
+                return View(model);
+            }
+            //var kurssiToteutukset = db.KurssiToteutukset.Include(k => k.Kurssit).Include(k => k.Luokkatilat).Include(k => k.Opettajat);
+            //return View(kurssiToteutukset.ToList());
         }
 
         // GET: KurssiToteutukset/Details/5
@@ -136,5 +147,34 @@ namespace Scrum3.Controllers
             }
             base.Dispose(disposing);
         }
+        [HttpPost]
+        public ActionResult Authorize(Logins LoginsModel)
+        {
+            ScrumEntities1 db = new ScrumEntities1();
+
+            var LoggedUser = db.Logins.SingleOrDefault(x => x.UserName == LoginsModel.UserName && x.PassWord == LoginsModel.PassWord);
+            if (LoggedUser != null)
+            {
+                ViewBag.LoginMessage = "Successfull login";
+                ViewBag.LoggedStatus = "In";
+                Session["UserName"] = LoggedUser.UserName;
+                return RedirectToAction("Index", "Kurssitoteutukset");
+            }
+            else
+            {
+                ViewBag.LoginMessage = "Login unsuccessfull";
+                ViewBag.LoggedStatus = "Out";
+                LoginsModel.LoginIdErrorMessage = "Tuntematon käyttäjätunnus tai salasana.";
+                return View("Login", LoginsModel);
+            }
+
+        }
+        public ActionResult LogOut()
+        {
+            Session.Abandon();
+            ViewBag.LoggedStatus = "Out";
+            return RedirectToAction("Index", "Logins"); //Uloskirjautumisen jälkeen pääsivulle
+        }
     }
 }
+
