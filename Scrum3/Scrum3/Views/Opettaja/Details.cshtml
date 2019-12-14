@@ -1,0 +1,34 @@
+﻿@model Scrum3.Model.Osallistumiset
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Osallistumiset</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.KurssiToteutukset.KurssitoteutusID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.KurssiToteutukset.KurssitoteutusID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Opiskelijat.Etunimi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Opiskelijat.Etunimi)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.OsallistumisetID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

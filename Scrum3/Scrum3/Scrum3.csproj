@@ -133,6 +133,7 @@
     <Compile Include="Controllers\KurssiToteutuksetController.cs" />
     <Compile Include="Controllers\LoginsController.cs" />
     <Compile Include="Controllers\LuokkatilatController.cs" />
+    <Compile Include="Controllers\OpettajaController.cs" />
     <Compile Include="Controllers\OpiskelijatController.cs" />
     <Compile Include="Controllers\OsallistumisetController.cs" />
     <Compile Include="Global.asax.cs">
@@ -178,6 +179,7 @@
       <DependentUpon>Scrum3Model.edmx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\Class1.cs" />
     <Compile Include="ViewModels\OsallistumisetVM.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -262,6 +264,11 @@
     <Content Include="Views\KurssiToteutukset\Details.cshtml" />
     <Content Include="Views\KurssiToteutukset\Edit.cshtml" />
     <Content Include="Views\KurssiToteutukset\Index.cshtml" />
+    <Content Include="Views\Opettaja\Create.cshtml" />
+    <Content Include="Views\Opettaja\Delete.cshtml" />
+    <Content Include="Views\Opettaja\Details.cshtml" />
+    <Content Include="Views\Opettaja\Edit.cshtml" />
+    <Content Include="Views\Opettaja\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
