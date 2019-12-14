@@ -27,8 +27,8 @@
 @foreach (var item in Model)
 {
     <tr>
-        @if (item.Kurssi == "Kemia" && item.Sukunimi=="Ankka")
-        {
+        @*@if (item.Kurssi == "Kemia" && item.Sukunimi=="Ankka")
+        {*@
             <td>
 
                 @Html.DisplayFor(modelItem => item.Kurssi)
@@ -45,7 +45,7 @@
             </td>
             <td>
             </td>
-        }
+        @*}*@
     </tr>
 }
 
