@@ -6,45 +6,48 @@
 
 <h2>Osallistumiset</h2>
 
-<button><a href="javascript:window.print()">Tulosta</a></button>
-
 
 <table class="table">
     <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Kurssi)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Paivamaara)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Sukunimi)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Etunimi)
-        </th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
-<tr>
-    <td>
-        @Html.DisplayFor(modelItem => item.Kurssi)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Paivamaara, "{0:d}")
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Sukunimi)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Etunimi)
-    </td>
-    <td>
-       
-    </td>
+        
+    <th>
+        @Html.DisplayNameFor(model => model.Kurssi)
+    </th>
+    <th>
+        @Html.DisplayNameFor(model => model.Paivamaara)
+    </th>
+    <th>
+        @Html.DisplayNameFor(model => model.Sukunimi)
+    </th>
+    <th>
+        @Html.DisplayNameFor(model => model.Etunimi)
+    </th>
 </tr>
-    }
+
+@foreach (var item in Model)
+{
+    <tr>
+        @if (item.Kurssi == "Kemia" && item.Sukunimi=="Ankka")
+        {
+            <td>
+
+                @Html.DisplayFor(modelItem => item.Kurssi)
+
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Paivamaara, "{0:d}")
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sukunimi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Etunimi)
+            </td>
+            <td>
+            </td>
+        }
+    </tr>
+}
 
 </table>
 
