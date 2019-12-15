@@ -17,5 +17,7 @@ namespace Scrum3.ViewModels
         public string Etunimi { get; set; }
         public string Sukunimi { get; set; }
         public int OsallistumisetID { get; set; }
+
+        public string Haku1 { get; set; }
     }
 }

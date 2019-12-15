@@ -4,50 +4,75 @@
     ViewBag.Title = "Index";
 }
 
+
 <h2>Osallistumiset</h2>
+
+<form>
+    <input type="button" value="Tulosta"
+           onclick="window.print()" />
+</form>
+
+<div class="form-group">
+    <label for="sel1">Select list (select one):</label>
+    <select class="form-control" id="sel1">
+        @foreach (var x in Model)
+        {
+
+
+            <option>@Html.DisplayFor(modelItem => x.Kurssi)</option>
+
+        }
+
+    </select>
+</div>
+
+
+
 
 
 <table class="table">
     <tr>
-        
-    <th>
-        @Html.DisplayNameFor(model => model.Kurssi)
-    </th>
-    <th>
-        @Html.DisplayNameFor(model => model.Paivamaara)
-    </th>
-    <th>
-        @Html.DisplayNameFor(model => model.Sukunimi)
-    </th>
-    <th>
-        @Html.DisplayNameFor(model => model.Etunimi)
-    </th>
-</tr>
 
-@foreach (var item in Model)
-{
-    <tr>
-        @*@if (item.Kurssi == "Kemia" && item.Sukunimi=="Ankka")
-        {*@
-            <td>
-
-                @Html.DisplayFor(modelItem => item.Kurssi)
-
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Paivamaara, "{0:d}")
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Sukunimi)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Etunimi)
-            </td>
-            <td>
-            </td>
-        @*}*@
+        <th>
+            @Html.DisplayNameFor(model => model.Kurssi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Paivamaara)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Sukunimi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Etunimi)
+        </th>
     </tr>
-}
+
+    @foreach (var item in Model)
+    //{string.Equals(string str1, string str2)
+
+    {
+        <tr>
+            @if (item.Kurssi.Equals("Englanti") && item.Sukunimi == "Ankka")
+            {
+                <td>
+
+                    @Html.DisplayFor(modelItem => item.Kurssi)
+
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Paivamaara, "{0:d}")
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Sukunimi)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Etunimi)
+                </td>
+                <td>
+                </td>
+            }
+        </tr>
+    }
 
 </table>
 
