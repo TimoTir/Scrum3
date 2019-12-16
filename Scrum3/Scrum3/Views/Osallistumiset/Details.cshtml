@@ -9,26 +9,28 @@
 <div>
     <h4>Osallistumiset</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.KurssiToteutukset.KurssitoteutusID)
-        </dt>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.OppilasID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Opiskelijat)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.KurssiToteutukset.Kurssit)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.KurssiToteutukset.Luokka)
+            </th>
+            <th></th>
+        </tr>
+    </table>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Tulosta tiedot" class="btn btn-default" />
+        </div>
+    </div>
+    
 
-        <dd>
-            @Html.DisplayFor(model => model.KurssiToteutukset.KurssitoteutusID)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Opiskelijat.Etunimi)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Opiskelijat.Etunimi)
-        </dd>
-
-    </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.OsallistumisetID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

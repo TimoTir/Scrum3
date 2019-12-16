@@ -4,10 +4,10 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Osallistumiset</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Lisää läsnäolo kursille", "Create")
 </p>
 <table class="table">
     <tr>
@@ -35,9 +35,9 @@
         @Html.DisplayFor(modelItem => item.Sukunimi)
     </td>
     <td>
-        @Html.ActionLink("Edit", "Edit", new { id = item.OsallistumisetID }) |
-        @Html.ActionLink("Details", "Details", new { id = item.OsallistumisetID }) |
-        @Html.ActionLink("Delete", "Delete", new { id = item.OsallistumisetID })
+        @Html.ActionLink("Muokkaa", "Edit", new { id = item.OsallistumisetID }) |
+        @*@Html.ActionLink("Osallistumiset", "Details", new { id = item.OsallistumisetID }) |*@
+        @Html.ActionLink("Poista", "Delete", new { id = item.OsallistumisetID })
     </td>
 </tr>
 }

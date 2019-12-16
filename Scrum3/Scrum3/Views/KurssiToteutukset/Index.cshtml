@@ -24,10 +24,10 @@
             @Html.DisplayNameFor(model => model.Luokkatilat.Luokka)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Opettajat.Etunimi)
+            @Html.DisplayNameFor(model => model.Opettajat.HenkiloID)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Opettajat.Sukunimi)
+           @* @Html.DisplayNameFor(model => model.Opettajat.Sukunimi)*@
         </th>
         <th></th>
     </tr>
@@ -41,16 +41,16 @@
         @Html.DisplayFor(modelItem => item.Kellonaika)
     </td>
     <td>
-        @Html.DisplayFor(modelItem => item.Kurssit.Kurssi)
+        @Html.DisplayFor(modelItem => item.Kurssi)
     </td>
     <td>
-        @Html.DisplayFor(modelItem => item.Luokkatilat.Luokka)
+        @Html.DisplayFor(modelItem => item.Luokka)
     </td>
     <td>
-        @Html.DisplayFor(modelItem => item.Opettajat.Etunimi)
+        @Html.DisplayFor(modelItem => item.Opettaja)
     </td>
     <td>
-        @Html.DisplayFor(modelItem => item.Opettajat.Sukunimi)
+        @*@Html.DisplayFor(modelItem => item.Opettaja)*@
     </td>
     <td>
         @Html.ActionLink("Muokkaa", "Edit", new { id = item.KurssitoteutusID }) |
