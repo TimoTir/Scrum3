@@ -41,7 +41,7 @@ namespace Scrum3.Controllers
         {
             ViewBag.Kurssi = new SelectList(db.Kurssit, "KurssiId", "Kurssi");
             ViewBag.Luokka = new SelectList(db.Luokkatilat, "LuokkaID", "Luokka");
-            ViewBag.Opettaja = new SelectList(db.Opettajat, "HenkiloID", "Etunimi");
+            ViewBag.Opettaja = new SelectList(db.Opettajat, "HenkiloID", "Etunimi","Sukunimi");
             return View();
         }
 
@@ -61,7 +61,7 @@ namespace Scrum3.Controllers
 
             ViewBag.Kurssi = new SelectList(db.Kurssit, "KurssiId", "Kurssi", kurssiToteutukset.Kurssi);
             ViewBag.Luokka = new SelectList(db.Luokkatilat, "LuokkaID", "Luokka", kurssiToteutukset.Luokka);
-            ViewBag.Opettaja = new SelectList(db.Opettajat, "HenkiloID", "Etunimi", kurssiToteutukset.Opettaja);
+            ViewBag.Opettaja = new SelectList(db.Opettajat, "HenkiloID", "Etunimi","Sukunimi", kurssiToteutukset.Opettaja);
             return View(kurssiToteutukset);
         }
 
@@ -79,7 +79,7 @@ namespace Scrum3.Controllers
             }
             ViewBag.Kurssi = new SelectList(db.Kurssit, "KurssiId", "Kurssi", kurssiToteutukset.Kurssi);
             ViewBag.Luokka = new SelectList(db.Luokkatilat, "LuokkaID", "Luokka", kurssiToteutukset.Luokka);
-            ViewBag.Opettaja = new SelectList(db.Opettajat, "HenkiloID", "Etunimi", kurssiToteutukset.Opettaja);
+            ViewBag.Opettaja = new SelectList(db.Opettajat, "HenkiloID", "Etunimi", "Sukunimi", kurssiToteutukset.Opettaja);
             return View(kurssiToteutukset);
         }
 
@@ -98,7 +98,7 @@ namespace Scrum3.Controllers
             }
             ViewBag.Kurssi = new SelectList(db.Kurssit, "KurssiId", "Kurssi", kurssiToteutukset.Kurssi);
             ViewBag.Luokka = new SelectList(db.Luokkatilat, "LuokkaID", "Luokka", kurssiToteutukset.Luokka);
-            ViewBag.Opettaja = new SelectList(db.Opettajat, "HenkiloID", "Etunimi", kurssiToteutukset.Opettaja);
+            ViewBag.Opettaja = new SelectList(db.Opettajat, "HenkiloID", "Etunimi", "Sukunimi", kurssiToteutukset.Opettaja);
             return View(kurssiToteutukset);
         }
 

@@ -20,12 +20,12 @@ namespace Scrum3.Model
         {
             this.Osallistumiset = new HashSet<Osallistumiset>();
         }
-    
+
         public int KurssitoteutusID { get; set; }
         [Display(Name = "P‰iv‰m‰‰r‰")]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [DataType(DataType.Date)]
-        public Nullable <System.DateTime> Paivamaara { get; set; }
+        public Nullable<System.DateTime> Paivamaara { get; set; }
         public int Opettaja { get; set; }
         public int Luokka { get; set; }
         public int Kurssi { get; set; }
