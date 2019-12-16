@@ -11,13 +11,18 @@ namespace Scrum3.Model
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
     public partial class Osallistumiset
     {
         public int OsallistumisetID { get; set; }
         public int KurssitoteutusID { get; set; }
         public int OppilasID { get; set; }
-    
+        [Display(Name = "P‰iv‰m‰‰r‰")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [DataType(DataType.Date)]
+        public Nullable<System.DateTime> Paivamaara { get; set; }
+
+
         public virtual KurssiToteutukset KurssiToteutukset { get; set; }
         public virtual Opiskelijat Opiskelijat { get; set; }
     }

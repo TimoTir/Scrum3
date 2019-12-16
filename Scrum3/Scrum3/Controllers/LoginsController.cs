@@ -41,11 +41,13 @@ namespace Scrum3.Controllers
                 else if (LoggedUser.AccessLevel.ToString() == "2")
                 {
                     //Opettaja
-                    int opettajaId;
+                    int henkiloId;
                     int LoginId = LoggedUser.LoginId;
                     Opettajat opet = new Opettajat();
-                    opettajaId = opet.HenkiloID;
-                    Session["opettajaId"] = opettajaId;
+                    opet = db.Opettajat.Where(o => o.LoginId == LoginId).FirstOrDefault();
+
+                    henkiloId = opet.HenkiloID;
+                    Session["henkiloId"] = henkiloId;
                     Session["KirjautunutKayttajaNimi"] = opet.Etunimi + " " + opet.Sukunimi;
                 }
                 else if (LoggedUser.AccessLevel.ToString() == "3")
