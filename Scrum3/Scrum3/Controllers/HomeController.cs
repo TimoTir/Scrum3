@@ -33,12 +33,12 @@ namespace Scrum3.Controllers
             var x = "";
 
             ScrumEntities1 db = new ScrumEntities1();
-            var a = from b in db.Opiskelijat
+            var a = from b in db.Kurssit
                     select b;
             foreach (var s in a)
             {
 
-                x += s.Etunimi.ToString() + s.Sukunimi.ToString();
+                x += s.Kurssi.ToString() + s.Laajuus.ToString();
 
             }
                 ViewBag.Message = x; 
