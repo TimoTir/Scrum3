@@ -26,12 +26,8 @@
         <th>
             @Html.DisplayNameFor(model => model.Sahkoposti)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LoginId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UserName)
-        </th>
+
+
         <th></th>
     </tr>
 
@@ -52,12 +48,7 @@
         <td>
             @Html.DisplayFor(modelItem => item.Sahkoposti)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LoginId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UserName)
-        </td>
+
         <td>
             @Html.ActionLink("Muokkaa", "Edit", new { id=item.Opiskelijanumero }) |
            @*@Html.ActionLink("Details", "Details", new { id=item.Opiskelijanumero }) |*@

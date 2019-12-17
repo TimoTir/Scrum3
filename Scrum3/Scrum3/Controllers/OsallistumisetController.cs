@@ -18,8 +18,9 @@ namespace Scrum3.Controllers
         public ActionResult Index()
         {
             
-            if ((Session["UserName"] == null) || (Session["AccessLevel"].ToString() != "3"))
+            if ((Session["UserName"] != null) && (Session["AccessLevel"].ToString() == "3"))
                 {
+                
                 var osallistumiset = from os in db.Osallistumiset
                                       join kt in db.KurssiToteutukset on os.KurssitoteutusID equals kt.KurssitoteutusID
                                       join ku in db.Kurssit on kt.Kurssi equals ku.KurssiId
@@ -34,29 +35,29 @@ namespace Scrum3.Controllers
                                           Sukunimi = op.Sukunimi,
                                           OsallistumisetID = os.OsallistumisetID
                                       };
-
-                //var osallistumiset = db.Osallistumiset.Include(o => o.KurssiToteutukset).Include(o => o.Opiskelijat);
+                //return View("Index","Logins");
+                ////var osallistumiset = db.Osallistumiset.Include(o => o.KurssiToteutukset).Include(o => o.Opiskelijat);
                 return View(osallistumiset); 
             } else
             {
-                int oppi = (int)Session["opiskelijaId"];
-                var osallistumiset = from os in db.Osallistumiset
-                                      join kt in db.KurssiToteutukset on os.KurssitoteutusID equals kt.KurssitoteutusID
-                                      join ku in db.Kurssit on kt.Kurssi equals ku.KurssiId
-                                      join op in db.Opiskelijat on os.OppilasID equals op.Opiskelijanumero
-                                      where os.OppilasID == oppi
-                                      select new OsallistumisetVM
-                                      {
-                                          KurssitoteutusID = kt.KurssitoteutusID,
-                                          Kurssi = ku.Kurssi,
-                                          Laajuus = (int)ku.Laajuus,
-                                          Paivamaara = (DateTime)kt.Paivamaara,
-                                          Etunimi = op.Etunimi,
-                                          Sukunimi = op.Sukunimi,
-                                          OsallistumisetID = os.OsallistumisetID
-                                      };
+                //int oppi = (int)Session["opiskelijaId"];
+                //var osallistumiset = from os in db.Osallistumiset
+                //                      join kt in db.KurssiToteutukset on os.KurssitoteutusID equals kt.KurssitoteutusID
+                //                      join ku in db.Kurssit on kt.Kurssi equals ku.KurssiId
+                //                      join op in db.Opiskelijat on os.OppilasID equals op.Opiskelijanumero
+                //                      where os.OppilasID == oppi
+                //                      select new OsallistumisetVM
+                //                      {
+                //                          KurssitoteutusID = kt.KurssitoteutusID,
+                //                          Kurssi = ku.Kurssi,
+                //                          Laajuus = (int)ku.Laajuus,
+                //                          Paivamaara = (DateTime)kt.Paivamaara,
+                //                          Etunimi = op.Etunimi,
+                //                          Sukunimi = op.Sukunimi,
+                //                          OsallistumisetID = os.OsallistumisetID
+                //                      };
                 //var osallistumiset = db.Osallistumiset.Include(o => o.KurssiToteutukset).Include(o => o.Opiskelijat).Where(o => o.OppilasID == oppi);
-                return View(osallistumiset);
+                return RedirectToAction("Index","Logins");
             }
 
         }
@@ -189,5 +190,34 @@ namespace Scrum3.Controllers
             }
             base.Dispose(disposing);
         }
+
+        //[HttpPost]
+        //public ActionResult Authorize(Logins LoginsModel)
+        //{
+        //    ScrumEntities1 db = new ScrumEntities1();
+
+        //    var LoggedUser = db.Logins.SingleOrDefault(x => x.UserName == LoginsModel.UserName && x.PassWord == LoginsModel.PassWord);
+        //    if (LoggedUser != null)
+        //    {
+        //        ViewBag.LoginMessage = "Successfull login";
+        //        ViewBag.LoggedStatus = "In";
+        //        Session["UserName"] = LoggedUser.UserName;
+        //        return RedirectToAction("Index", "Osallistumiset");
+        //    }
+        //    else
+        //    {
+        //        ViewBag.LoginMessage = "Login unsuccessfull";
+        //        ViewBag.LoggedStatus = "Out";
+        //        LoginsModel.LoginIdErrorMessage = "Tuntematon käyttäjätunnus tai salasana.";
+        //        return View("Login", LoginsModel);
+        //    }
+
+        //}
+        //public ActionResult LogOut()
+        //{
+        //    Session.Abandon();
+        //    ViewBag.LoggedStatus = "Out";
+        //    return RedirectToAction("Index", "Logins"); //Uloskirjautumisen jälkeen pääsivulle
+        //}
     }
 }

@@ -14,8 +14,11 @@ namespace Scrum3.Model
     using System.ComponentModel.DataAnnotations;
     public partial class Osallistumiset
     {
+        [Display(Name = "Kurssitoteutus")]
         public int OsallistumisetID { get; set; }
+        [Display(Name = "Kurssitoteutus")]
         public int KurssitoteutusID { get; set; }
+        [Display(Name = "Oppilas")]
         public int OppilasID { get; set; }
         [Display(Name = "P‰iv‰m‰‰r‰")]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]

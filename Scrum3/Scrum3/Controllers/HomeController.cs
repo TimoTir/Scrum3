@@ -28,25 +28,25 @@ namespace Scrum3.Controllers
             return View();
         }
 
-        public ActionResult Hae()
-        {
-            var x = "";
+        //public ActionResult Hae()
+        //{
+        //    var x = "";
 
-            ScrumEntities1 db = new ScrumEntities1();
-            var a = from b in db.Kurssit
-                    select b;
-            foreach (var s in a)
-            {
+        //    ScrumEntities1 db = new ScrumEntities1();
+        //    var a = from b in db.Kurssit
+        //            select b;
+        //    foreach (var s in a)
+        //    {
 
-                x += s.Kurssi.ToString() + s.Laajuus.ToString();
+        //        x += s.Kurssi.ToString() + s.Laajuus.ToString();
 
-            }
-                ViewBag.Message = x; 
-
-
+        //    }
+        //        ViewBag.Message = x; 
 
 
-            return View();
-        }
+
+
+        //    return View();
+        
     }
 }
