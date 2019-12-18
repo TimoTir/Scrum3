@@ -18,9 +18,9 @@ namespace Scrum3.Controllers
         // GET: Opettaja
         public ActionResult Index()
         { 
-       if ((Session["UserName"] != null) && (Session["AccessLevel"].ToString() == "2"))
+                if ((Session["UserName"] != null) && (Session["AccessLevel"].ToString() == "2"))
                 {
-                var osallistumiset = from os in db.Osallistumiset
+                    var osallistumiset = from os in db.Osallistumiset
                                      join kt in db.KurssiToteutukset on os.KurssitoteutusID equals kt.KurssitoteutusID
                                      join ku in db.Kurssit on kt.Kurssi equals ku.KurssiId
                                      join op in db.Opiskelijat on os.OppilasID equals op.Opiskelijanumero
@@ -36,27 +36,19 @@ namespace Scrum3.Controllers
                                      };
 
                 
-                return View(osallistumiset);
-    } else
-            {  
+                         return View(osallistumiset);
+                } 
+                    else
+                    {  
                 
                 
                 
-                return RedirectToAction("Index", "Home");
+                        return RedirectToAction("Index","Logins");
 
-            };
+                    };
                 
                 
         }
     }
-
-
            
-        
-
-       
-
-        
-        
-    
 }

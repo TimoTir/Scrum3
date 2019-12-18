@@ -21,7 +21,7 @@
 
             <option>
 
-                @Html.DisplayFor(modelItem => x.Kurssi) -
+                @Html.DisplayFor(modelItem => x.Kurssi) 
                 @Html.DisplayFor(modelItem => x.Paivamaara)
 
             </option> 
@@ -48,26 +48,26 @@
         </th>
     </tr>
 
-    @foreach (var item in Model)
+    @foreach (var osallistumiset in Model)
     //{string.Equals(string str1, string str2)
 
     {
         <tr>
-            @if (item.Kurssi.Equals("X") && item.Sukunimi == "X")
+            @if (osallistumiset.Kurssi.Equals("X") && osallistumiset.Sukunimi == "X")
             {
                 <td>
 
-                    @Html.DisplayFor(modelItem => item.Kurssi)
+                    @Html.DisplayFor(modelItem => osallistumiset.Kurssi)
 
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Paivamaara, "{0:d}")
+                    @Html.DisplayFor(modelItem => osallistumiset.Paivamaara, "{0:d}")
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Sukunimi)
+                    @Html.DisplayFor(modelItem => osallistumiset.Sukunimi)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Etunimi)
+                    @Html.DisplayFor(modelItem => osallistumiset.Etunimi)
                 </td>
                 <td>
                 </td>
