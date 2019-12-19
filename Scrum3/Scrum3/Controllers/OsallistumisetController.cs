@@ -17,46 +17,50 @@ namespace Scrum3.Controllers
         // GET: Osallistumiset
         public ActionResult Index()
         {
-            
-            if ((Session["UserName"] != null) && (Session["AccessLevel"].ToString() == "3"))
+            if (Session["UserName"] != null)
+            {
+                if (Session["AccessLevel"].ToString() != "3")
                 {
-                
-                var osallistumiset = from os in db.Osallistumiset
-                                      join kt in db.KurssiToteutukset on os.KurssitoteutusID equals kt.KurssitoteutusID
-                                      join ku in db.Kurssit on kt.Kurssi equals ku.KurssiId
-                                      join op in db.Opiskelijat on os.OppilasID equals op.Opiskelijanumero
-                                      select new OsallistumisetVM
-                                      {
-                                          KurssitoteutusID = kt.KurssitoteutusID,
-                                          Kurssi = ku.Kurssi,
-                                          Laajuus = (int)ku.Laajuus,
-                                          Paivamaara = (DateTime)kt.Paivamaara,
-                                          Etunimi = op.Etunimi,
-                                          Sukunimi = op.Sukunimi,
-                                          OsallistumisetID = os.OsallistumisetID
-                                      };
-                //return View("Index","Logins");
-                ////var osallistumiset = db.Osallistumiset.Include(o => o.KurssiToteutukset).Include(o => o.Opiskelijat);
-                return View(osallistumiset); 
+                    var osallistumiset = from os in db.Osallistumiset
+                                         join kt in db.KurssiToteutukset on os.KurssitoteutusID equals kt.KurssitoteutusID
+                                         join ku in db.Kurssit on kt.Kurssi equals ku.KurssiId
+                                         join op in db.Opiskelijat on os.OppilasID equals op.Opiskelijanumero
+                                         select new OsallistumisetVM
+                                         {
+                                             KurssitoteutusID = kt.KurssitoteutusID,
+                                             Kurssi = ku.Kurssi,
+                                             Laajuus = (int)ku.Laajuus,
+                                             Paivamaara = (DateTime)kt.Paivamaara,
+                                             Etunimi = op.Etunimi,
+                                             Sukunimi = op.Sukunimi,
+                                             OsallistumisetID = os.OsallistumisetID
+                                         };
+                    return View(osallistumiset);
+                }
+                else //Case acceslevel=3 eli opiskelija
+                {
+                    int oppi = (int)Session["opiskelijaId"];
+                    var osallistumiset = from os in db.Osallistumiset
+                                         join kt in db.KurssiToteutukset on os.KurssitoteutusID equals kt.KurssitoteutusID
+                                         join ku in db.Kurssit on kt.Kurssi equals ku.KurssiId
+                                         join op in db.Opiskelijat on os.OppilasID equals op.Opiskelijanumero
+                                         where os.OppilasID == oppi
+                                         select new OsallistumisetVM
+                                         {
+                                             KurssitoteutusID = kt.KurssitoteutusID,
+                                             Kurssi = ku.Kurssi,
+                                             Laajuus = (int)ku.Laajuus,
+                                             Paivamaara = (DateTime)kt.Paivamaara,
+                                             Etunimi = op.Etunimi,
+                                             Sukunimi = op.Sukunimi,
+                                             OsallistumisetID = os.OsallistumisetID
+                                         };
+                    //var osallistumiset = db.Osallistumiset.Include(o => o.KurssiToteutukset).Include(o => o.Opiskelijat).Where(o => o.OppilasID == oppi);
+
+                    return View(osallistumiset);
+                }
             } else
             {
-                //int oppi = (int)Session["opiskelijaId"];
-                //var osallistumiset = from os in db.Osallistumiset
-                //                      join kt in db.KurssiToteutukset on os.KurssitoteutusID equals kt.KurssitoteutusID
-                //                      join ku in db.Kurssit on kt.Kurssi equals ku.KurssiId
-                //                      join op in db.Opiskelijat on os.OppilasID equals op.Opiskelijanumero
-                //                      where os.OppilasID == oppi
-                //                      select new OsallistumisetVM
-                //                      {
-                //                          KurssitoteutusID = kt.KurssitoteutusID,
-                //                          Kurssi = ku.Kurssi,
-                //                          Laajuus = (int)ku.Laajuus,
-                //                          Paivamaara = (DateTime)kt.Paivamaara,
-                //                          Etunimi = op.Etunimi,
-                //                          Sukunimi = op.Sukunimi,
-                //                          OsallistumisetID = os.OsallistumisetID
-                //                      };
-                //var osallistumiset = db.Osallistumiset.Include(o => o.KurssiToteutukset).Include(o => o.Opiskelijat).Where(o => o.OppilasID == oppi);
                 return RedirectToAction("Index","Logins");
             }
 
