@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Scrum3.Model;
@@ -14,13 +15,13 @@ namespace Scrum3.Controllers
     public class OpettajaController : Controller
     {
         private ScrumEntities1 db = new ScrumEntities1();
-        
+
         // GET: Opettaja
         public ActionResult Index()
-        { 
-                if ((Session["UserName"] != null) && (Session["AccessLevel"].ToString() == "2"))
-                {
-                    var osallistumiset = from os in db.Osallistumiset
+        {
+            if ((Session["UserName"] != null) && (Session["AccessLevel"].ToString() == "2"))
+            {
+                var osallistumiset = from os in db.Osallistumiset
                                      join kt in db.KurssiToteutukset on os.KurssitoteutusID equals kt.KurssitoteutusID
                                      join ku in db.Kurssit on kt.Kurssi equals ku.KurssiId
                                      join op in db.Opiskelijat on os.OppilasID equals op.Opiskelijanumero
@@ -35,20 +36,13 @@ namespace Scrum3.Controllers
                                          OsallistumisetID = os.OsallistumisetID
                                      };
 
-                
-                         return View(osallistumiset);
-                } 
-                    else
-                    {  
-                
-                
-                
-                        return RedirectToAction("Index","Logins");
+                return View(osallistumiset);
+            }
 
-                    };
-                
-                
+            else
+            {
+                return RedirectToAction("Index", "Logins");
+            }
         }
     }
-           
 }
